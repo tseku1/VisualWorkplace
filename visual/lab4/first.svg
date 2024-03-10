@@ -1,0 +1,14 @@
+<svg width="350" height="250" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#87CEEB" />
+
+  <!-- Sun -->
+  <circle cx="30" cy="30" r="20" fill="#FFD700" />
+
+  <!-- Mountain -->
+  <polygon points="10,240 100,40 190,240" fill="#8B4513" />
+  <polygon points="40,440 250,40 340,240" fill="#8B4513" />
+  
+  <!-- Ground -->
+  <rect width="100%" height="10%" y="90%" fill="#228B22" />
+</svg>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лаб4</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+
+        ul{
+            padding: 0;
+            list-style: none;
+        }
+
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        #header{
+            margin-bottom: 15px;
+            background: #333;
+            color: #fff;
+            padding: 10px;
+        }
+
+        #main{
+            float: left;
+            width: 55%;
+        }
+
+        #sidebar{
+            float: right;
+            width: 42%;
+        }
+
+        .clr{
+            clear: both;
+        }
+
+        #footer{
+            background: #333;
+            color: #fff;
+            padding: 10px;
+        }
+
+        .card{
+            border: 1px solid #ddd;
+            background: #f4f4f4;
+            padding: 20px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!--dotroo yu bgag todorhoilj ogdog tagiig semantic tag gene -->
+    <header id="header" class="card">
+        <h1>Rain sound</h1>
+        <audio controls loop>
+            <source src="heavy-rain-nature-sounds-8186.mp3" type="audio/mpeg">
+        </audio>
+    </header>
+
+    <!-- Main Content (Left) -->
+    <main id="main">
+        <section id="welcome" class="card">
+            <h2>rain video</h2>
+            <video width="435px" controls muted loop autoplay>
+                <source src="time_lapse_video_of_night_sky (720p).mp4" type="video/mp4">
+            </video>
+        </section>
+    </main>
+
+    <!-- Sidebar (right) -->
+    <sidebar id="sidebar" class="card">
+        <h3>SVG</h3>
+        <!-- Navigation-->
+        <iframe src="first.svg" width="350" height="250" frameborder="0"></iframe>
+    </sidebar>
+    
+    <div class="clr"></div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <h2>Canvas</h2>
+
+        <canvas id="MyCanvas" width="900" height="500"></canvas>
+
+    </footer>
+</body>
+
+<script src="main.js"></script>
+
+</html>
