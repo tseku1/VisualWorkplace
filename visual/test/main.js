@@ -1,244 +1,85 @@
-const canvas = document.getElementById("snake-board")
-const ctx = canvas.getContext("2d");
-const score = document.getElementById("current-score");
-const highest = document.getElementById("highest-score")
-
-const gridSize = 40;
-let snake = [{ x: 10, y: 10 }];
-let food = generateFood(); // food[2] is food genre; regular friut = 0; slower buff friut = 1; extra point friut = 2;
-let highScore = localStorage.getItem("highScore") ? localStorage.getItem("highScore") : 0;
-highest.innerHTML = "Highest Score: " + highScore
-let direction = "right"
-let gameInterval;
-let gameSpeedDelay = 200;
-let gameStarted = false;
-let scoreGame = 0;
-let start = true;
-let speedSlowerDuration;
-function draw() {
-    canvas.innerHTML = "";
-    clearCanvas();
-    drawSnake();
-    drawFood();
-    //updateScore();
-}
-
-function clearCanvas() {
-    ctx.fillStyle = "white"
-    ctx.fillRect(0, 0, 600, 600 )
-}
-
-function drawSnake() {
-    snake.forEach((segment) => {
-        ctx.fillStyle = "green"
-        ctx.fillRect(segment.x * 15, segment.y * 15, 15, 15)
-    })
-}
-
-function drawFood() {
-    if (gameStarted) {
-        //ctx.fillStyle = "red";
-        //ctx.fillRect(food.x * 15, food.y * 15, 15, 15)
-        ctx.lineWidth = 0;
-        ctx.beginPath();
-        ctx.arc(food.x * 15 + 7.5, food.y * 15 + 7.5, 7.5, 0, Math.PI * 2, true)
-        if(food.genre === 0) ctx.fillStyle = 'red';
-        else if (food.genre === 1) ctx.fillStyle = 'blue';
-        else ctx.fillStyle = 'purple';
-        ctx.fill();
-        ctx.stroke();
-    }
-}
-
-function generateFood() {
-    const genreChance = Math.floor(Math.random() * 100);
-    let genre = 0;
-    if (genreChance < 70) {
-        genre = 0;
-    } else if (genreChance < 85) {
-        genre = 1;
-    } else {
-        genre = 2;
-    }
-    // console.log("Generated Food Genre:", genre);
-    const x = Math.floor(Math.random() * gridSize);
-    const y = Math.floor(Math.random() * gridSize);
-    return { x, y, genre };
-}
 
 
-function move() {
-    const head = { ...snake[0] };
-    switch (direction) {
-        case 'up':
-            head.y--;
-            break;
-        case 'down':
-            head.y++;
-            break;
-        case 'left':
-            head.x--;
-            break;
-        case 'right':
-            head.x++;
-            break;
-    }
+// const { start } = require("init");
 
-    snake.unshift(head);
+// // 6-12 35min 6tsag odort
+// function findNewStudentInterest() {
+//     let startDate = new Date('2018-09-01');
+//     let endDate = new Date('2022-06-01');
+//     let curse = 1;
+//     let niitSurahTsag = 0;
+//     let totalWeek = 0;
+//     let niitAjillahDolooHonog = 32;
+//     let ajillahTsag = 1280;
+//     let surahTsag = 22.5;
+//     console.log(startDate.toDateString());
+//     console.log(endDate.getDay());
 
-    if (head.x === food.x && head.y === food.y) {
-        switch(food.genre){
-            case 0:
-                scoreGame += 1;
-            break;
-            case 1:
-                scoreGame += 1;
-                slowSpeed();
-            break;
-            case 2:
-                scoreGame += 2;
-            break;
+
+//     while (startDate <= endDate) {
+    
+//         if (startDate.getMonth() === 5) {
+//             console.log("zun bolloo");
+//             // Skip summer months by adding three months (going to September 1st)
+//             startDate.setMonth(startDate.getMonth() + 3);
+//             curse += 1;
+//             continue;
+//         }
+
+//         let heddehOdor = startDate.getDay() + 1;
+//         var futureDate = new Date(startDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+
+//         // Дутуу Долоо хоногийг орхино
+//         if(startDate.getDay !== 1){
+//             if(startDate.getDay === 0){
+//                 startDate.setDate(startDate.getDate() + 1);
+//             }else{
+//                 startDate.setDate(startDate.getDate() + (8 - startDate.getDay()));
+//             }
+//         }
+
+//         //niit suraltsah hugatsaa
+//         if (futureDate <= endDate) {
+//             if(heddehOdor !== 5 && heddehOdor !== 6){
+//                 totalWeek += 1
+//                 console.log("ih surguuli: ", startDate);
+//                 // niitSurahTsag += 90*3*5/60;
+//             }
+//             console.log(totalWeek)
+//             // console.log(niitSurahTsag);
+//         }
+//             // Increment the currentDate by one day for the next iteration
+//         startDate = futureDate
+//     }
+//     // console.log(niitSurahTsag)
+//     console.log("ajliin hajuugaar suraltsah tsag tsag:",(totalWeek-niitAjillahDolooHonog) * surahTsag)
+//     console.log("niit surah tsag:",totalWeek * surahTsag)
+//     console.log("precent:", totalWeek * surahTsag*100/ajillahTsag,"%")
+// }
+
+// findNewStudentInterest();
+
+function tableCreate() {
+    var body = document.getElementsByTagName('body')[0];
+    var tbl = document.createElement('table');
+    tbl.style.width = '100%';
+    tbl.setAttribute('border', '1');
+    var tbdy = document.createElement('tbody');
+    for (var i = 0; i < 3; i++) {
+      var tr = document.createElement('tr');
+      for (var j = 0; j < 2; j++) {
+        if (i == 2 && j == 1) {
+          break
+        } else {
+          var td = document.createElement('td');
+          td.appendChild(document.createTextNode('\u0020'))
+          i == 1 && j == 1 ? td.setAttribute('rowSpan', '2') : null;
+          tr.appendChild(td)
         }
-        score.innerHTML = "Score: " + scoreGame
-        if (highScore < scoreGame) {
-            highScore = scoreGame
-            localStorage.setItem("highScore", highScore)
-            highest.innerHTML = "Highest Score: " + highScore
-        }
-        food = generateFood()
-        increaseSpeed()
-        clearInterval(gameInterval)
-        gameInterval = setInterval(() => {
-            move()
-            checkCollision();
-            draw()
-        }, gameSpeedDelay)
-    } else {
-        snake.pop()
+      }
+      tbdy.appendChild(tr);
     }
-}
-
-function startGame() {
-    scoreGame = 0;
-    gameStarted = true;
-    start = false;
-    gameInterval = setInterval(() => {
-        move();
-        checkCollision();
-        draw();
-    }, gameSpeedDelay)
-}
-
-function handleKeyPress(event) {
-    if (
-        (!gameStarted && event.code === "Space") || 
-        (!gameStarted && event.key === " ") 
-    ) {
-        startGame();
-    } else if (start) {
-        drawStartWindow();
-    } else {
-        switch (event.key) {
-            case 'ArrowUp':
-                if (direction !== "down") {
-                    direction = 'up';
-                }
-                break;
-            case 'ArrowDown':
-                if (direction !== "up") {
-                    direction = 'down';
-                }
-                break;
-            case 'ArrowLeft':
-                if (direction !== "right") {
-                    direction = 'left';
-                }
-                break;
-            case 'ArrowRight':
-                if (direction !== "left") {
-                    direction = 'right';
-                }
-                break;
-        }
-    }
-}
-drawStartWindow();
-
-document.addEventListener('keydown', handleKeyPress)
-
-function increaseSpeed() {
-    if (gameSpeedDelay > 150) {
-        gameSpeedDelay -= 5
-    } else if (gameSpeedDelay > 100) {
-        gameSpeedDelay -= 3
-    } else if (gameSpeedDelay > 50) {
-        gameSpeedDelay -= 2
-    } else if (gameSpeedDelay > 25) {
-        gameSpeedDelay -= 1
-    }
-}
-
-function slowSpeed(){
-    if (gameSpeedDelay > 150) {
-        gameSpeedDelay += 15
-    } else if (gameSpeedDelay > 100) {
-        gameSpeedDelay += 9
-    } else if (gameSpeedDelay > 50) {
-        gameSpeedDelay += 6
-    } else if (gameSpeedDelay > 25) {
-        gameSpeedDelay += 3
-    }
-}
-function checkCollision() {
-    const head = snake[0];
-
-    if (head.x < 0 || head.x >= gridSize || head.y < 0 || head.y >= gridSize) {
-        resetGame();
-    }
-
-    for (let i = 1; i < snake.length; i++) {
-        if (head.x === snake[i].x && head.y === snake[i].y) {
-            resetGame()
-        }
-    }
-}
-
-function resetGame() {
-    stopGame();
-    snake = [{ x:10, y:10 }]
-    food = generateFood()
-    direction = "left"
-    gameSpeedDelay = 200
-    updateScore()
-}
-
-function stopGame() {
-    //alert("Game Over")
-    drawGameOver()
-    score.innerHTML = "Score: 1"
-    clearInterval(gameInterval)
-    gameStarted = false
-}
-
-function drawGameOver() {
-    ctx.font = '50px Segoe UI';
-    ctx.fillStyle = 'black';
-    ctx.textAlign = 'center';
-    ctx.fillText('Game Over', canvas.width / 2, canvas.height / 24 * 11 );
-    ctx.font = '25px Segoe UI';
-    ctx.fillText('Press shift button to restart the game', canvas.width / 2, canvas.height / 8 * 4 );
-    const element = document.getElementsByTagName("body");
-    element.style.zIndex = "1";
-    element.style.background = "url(./OIP.jpg)";
-
-}
-
-function drawStartWindow() {
-    ctx.font = '50px Segoe UI';
-    ctx.fillStyle = 'black';
-    ctx.textAlign = 'center';
-    ctx.fillText('Welcome to snake game', canvas.width / 2, canvas.height / 24 * 11 );
-    ctx.font = '25px Segoe UI';
-    ctx.fillText('Press shift button to restart the game', canvas.width / 2, canvas.height / 8 * 4 );
-
-}
+    tbl.appendChild(tbdy);
+    body.appendChild(tbl)
+  }
+  tableCreate();

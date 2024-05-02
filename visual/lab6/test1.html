@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .landscape {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    background-color: skyblue;
+}
+
+.sun {
+    position: absolute;
+    top: 100px;
+    left: 100px; /* Initial position */
+    width: 100px;
+    height: 100px;
+    background-color: yellow;
+    border-radius: 50%;
+    animation: moveSun 10s linear infinite;
+}
+
+@keyframes moveSun {
+    from {
+        left: 100px; /* Initial position */
+    }
+    to {
+        left: 700px; /* Final position */
+    }
+}
+
+  </style>
+</head>
+<body>
+  <div class="landscape">
+    <div id="sun" class="sun"></div>
+</div>
+
+</body>
+</html>

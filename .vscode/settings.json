@@ -1,3 +1,8 @@
 {
-    "github.branchProtection": false
+    "github.branchProtection": false,
+    "liveServer.settings.port": 5501,
+    "files.watcherExclude": {
+        "**/target": true
+    },
+    "python.REPL.enableREPLSmartSend": false
 }

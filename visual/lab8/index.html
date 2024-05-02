@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CV</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div style="padding-left: 100px">
+        <h3>Дараах утгыг бөглөнө үү</h3>
+        <table border="1px">
+            <form action="">
+                <tr>
+                    <td><label for="picture">цээж зураг</label></td>
+                    <td><input type="file" name="picture" id="picture"></td>
+                </tr>
+                <tr>
+                    <td><label for="fname">Овог:</label></td>
+                    <td><input type="text" id="fname" name="fname"></td>
+                </tr>
+                <tr>
+                    <td><label for="lname">Нэр:</label></td>
+                    <td><input type="text" id="lname" name="lname"></td>
+                </tr>
+                <tr>
+                    <td><label for="age">Нас:</label></td>
+                    <td><input type="number" id="age" name="age"></td>
+                </tr>
+                <tr>
+                    <td><label for="edu">Суралцаж буй сургууль</label></td>
+                    <td><input type="text" name="edu" id="edu"></td>
+                </tr>
+                <tr>
+                    <td><label for="date">Төрсөн өдөр</label></td>
+                    <td><input type="date" name="date" id="date"></td>
+                </tr>
+                <tr>
+                    <td><label for="chenre">Хүйс</label></td>
+                    <td>
+                        <input type="checkbox" id="genre" name="genre">эрэгтэй <br>
+                        <input type="checkbox" id="genre1" name="genre1">эмэгтэй
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="email">И-мэйл</label></td>
+                    <td><input type="email" id="email" name="email"></td>
+                </tr>
+                <tr>
+                    <td><label for="phoneNumber">Утасны дугаар</label></td>
+                    <td><input type="number" id="phoneNumber" name="phoneNumber"></td>
+                </tr>
+                <tr>
+                    <td><label for="programinglanguage">Дуртай хэл</label></td>
+                    <td>
+                        <input type="radio" name="html" id="html">HTML<br>
+                        <input type="radio" name="css" id="css">CSS<br>
+                        <input type="radio" name="js" id="js">JS
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="register">Регистрийн дугаар</label></td>
+                    <td><input type="text" name="register" id="register"></td>
+                </tr>
+                <tr>
+                    <td><label for="password">Facebook-йин нууц үг</label></td>
+                    <td><input type="password" name="password" id="password"></td>
+                </tr>
+                <tr>
+                    <td><label for="site">дуртай сайт</label></td>
+                    <td><input type="url" name="site" id="site"></td>
+                </tr>
+                <tr>
+                    <td><label for="energy">Хичээлийн Идэвх</label></td>
+                    <td>0<input type="range" name="energy" id="energy">100</td>
+                </tr>
+                <tr>
+                    <td><label for="Lkod"></label>Хичээлийн код</td>
+                    <td><input type="text" name="Lkod" id="LKod"></td>
+                </tr>
+                <tr>
+                    <td><label for="LName"></label>Хичээлийн нэр</td>
+                    <td><input type="text" name="LName" id="LName"></td>
+                </tr>
+                <tr>
+                    <td><label for="teacher"></label>Багшийн нэр</td>
+                    <td><input type="text" name="teacher" id="teacher"></td>
+                </tr>
+                <tr>
+                    <td><label for="kerdit"></label>Кредит</td>
+                    <td><input type="number" name="kerdit" id="kerdit"></td>
+                </tr>
+            </form>
+        </table>
+        <button id="duusgah-button" onclick="event">дуусгах</button>
+        <table id="add">
+            <tr>
+                <td><b>Хичээлийн нэр</b></td>
+                <td><b>Хичээлийн код</b></td>
+                <td><b>Багшийн нэр</b></td>
+                <td><b>Кредит</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <select name="LName" id="subname">
+                        <option value="1">вэб зохиомж</option>
+                        <option value="2">вэб зохиомж</option>
+                        <option value="3">вэб зохиомж</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="Lkod" id="subcode">
+                        <option value="1">F.IMT202</option>
+                        <option value="1">F.IMT202</option>
+                        <option value="1">F.IMT202</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="teacher" id="Teacher">
+                        <option value="1">Сүх-очир</option>
+                        <option value="1">Сүх-очир</option>
+                        <option value="1">Сүх-очир</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="kerdit" id="kr">
+                        <option value="1">1</option>
+                        <option value="2">1</option>
+                        <option value="3">1</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <button onclick="addSubmit()">нэмэх</button>
+    </div>
+
+
+<div id="page">
+    <div class="photo-and-name">
+        <img src="profile.png" class="photo" alt="Profile Picture" id="image">
+        <div class="contact-info-box">
+            <table>
+                <tr>
+                    <td class="name" id="Fname"></td>
+                    <td class="name" id="Lname"></td>
+                </tr>
+                <tr>
+                    <td><h3 class="job-title" id="ajil"></h3></td>
+                </tr>
+                <br>
+                <tr class="contact-details">
+                    <td><p>Утас:</p></td>
+                    <td id="pnumber"></td>
+                    <td> И мэйл:</td>
+                    <td id="mail"></td>
+                </tr>
+                <tr>
+                    <td>нас:</td>
+                    <td id="nas"></td>
+                </tr>
+                <tr>
+                    <td>Хүйс:</td>
+                    <td ><b id="genree"></b></td>
+                </tr>
+                <tr>
+                    <td>Төрсөн өдөр:</td>
+                    <td><b id="torsonOdor"><sup></sup></b></td>
+                </tr>
+                <tr>
+                    <td>Регистрийн дугаар:</td>
+                    <td id="reg"><b></b></td>
+                </tr>
+                <tr>
+                    <td>Суралцаж буй сургууль:</td>
+                    <td><b id="school"></b></td>
+                </tr>
+                <tr>
+                    <td>Дуртай Хэл:</td>
+                    <td><p id="hel"></p></td>
+                </tr>
+                <tr>
+                    <td>Нууц Үг:</td>
+                    <td><p id="nuutsVg"></p></td>
+                </tr>
+                <tr>
+                    <td>Дуртай сайт:</td>
+                    <td><p id="fav"></p></td>
+                </tr>
+                <tr>
+                    <td>Хичээлийн Идэвх:</td>
+                    <td id="energ"></td>
+                </tr>
+                
+                <table id="copy">
+                    <tr>
+                        <td><b>Хичээлийн нэр</b></td>
+                        <td><b>Хичээлийн код</b></td>
+                        <td><b>Багшийн нэр</b></td>
+                        <td><b>Кредит</b></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            
+                        </td>
+                        <td>
+                            
+                        </td>
+                        <td>
+                            
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                </table>
+            </table>
+
+            <br>
+        </div>
+    </div>
+</div>
+<Script src="script.js"></Script>
+</body>
+</html>

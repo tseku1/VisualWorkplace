@@ -1,6 +1,20 @@
 {
   "dependencies": {
     "antlr4": "^4.13.1-patch-1",
-    "init": "^0.1.2"
-  }
+    "init": "^0.1.2",
+    "mssql": "^10.0.2"
+  },
+  "name": "q",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
