@@ -11,6 +11,11 @@ char consumer_array[BUFFER_SIZE];
 int producer_index = 0;
 int consumer_index = 0;
 
+// mutex zarlalt
+pthread_mutex_t producer_mutex;
+pthread_mutex_t consumer_mutex;
+
+
 void *producer1(void *arg)
 {
     while (consumer_index < BUFFER_SIZE)
@@ -28,6 +33,9 @@ void *producer1(void *arg)
             product = 'G';
             Sleep(PRODUCTION_COST);
         }
+
+        // mutex lock
+        pthread_mutex_lock(&producer_mutex);
 
         char last_char = (producer_index > 0) ? producer_array[producer_index - 1] : '\0';
         if (product == 'R')
@@ -48,6 +56,8 @@ void *producer1(void *arg)
                 producer_array[producer_index++] = 'G';
             }
         }
+        // mutex unlock
+        pthread_mutex_unlock(&producer_mutex);
     }
 
     pthread_exit(NULL);
@@ -71,6 +81,8 @@ void *producer2(void *arg)
             Sleep(PRODUCTION_COST);
         }
 
+        // mutex lock
+        pthread_mutex_lock(&producer_mutex);
         char last_char = (producer_index > 0) ? producer_array[producer_index - 1] : '\0';
         if (product == 'G')
         {
@@ -86,6 +98,8 @@ void *producer2(void *arg)
                 producer_array[producer_index++] = 'B';
             }
         }
+        // unlock
+        pthread_mutex_unlock(&producer_mutex);
     }
 
     pthread_exit(NULL);
@@ -109,6 +123,8 @@ void *producer3(void *arg)
             Sleep(PRODUCTION_COST);
         }
 
+        // mutex lock
+        pthread_mutex_lock(&producer_mutex);
         char last_char = (producer_index > 0) ? producer_array[producer_index - 1] : '\0';
         if (product == 'B')
         {
@@ -128,6 +144,7 @@ void *producer3(void *arg)
                 producer_array[producer_index++] = 'R';
             }
         }
+        pthread_mutex_unlock(&producer_mutex);
     }
 
     pthread_exit(NULL);
@@ -137,6 +154,7 @@ void *consumer1(void *arg)
 {
     while (consumer_index < BUFFER_SIZE)
     {
+        pthread_mutex_lock(&consumer_mutex);
         char last_p_char;
         char last_c_char = (consumer_index > 0) ? consumer_array[consumer_index - 1] : '\0';
         if (last_c_char == 'R')
@@ -171,6 +189,7 @@ void *consumer1(void *arg)
                 consumer_array[consumer_index++] = producer_array[--producer_index];
             }
         }
+        pthread_mutex_unlock(&consumer_mutex);
     }
     pthread_exit(NULL);
 }
@@ -180,6 +199,8 @@ void *consumer2(void *arg)
     while (consumer_index < BUFFER_SIZE)
     {
         char last_p_char;
+
+        pthread_mutex_lock(&consumer_mutex);
         char last_c_char = (consumer_index > 0) ? consumer_array[consumer_index - 1] : '\0';
         if (last_c_char == 'R')
         {
@@ -213,6 +234,7 @@ void *consumer2(void *arg)
                 consumer_array[consumer_index++] = producer_array[--producer_index];
             }
         }
+        pthread_mutex_unlock(&consumer_mutex);
     }
     pthread_exit(NULL);
 }
@@ -222,6 +244,7 @@ void *consumer3(void *arg)
     while (consumer_index < BUFFER_SIZE)
     {
         char last_p_char;
+        pthread_mutex_lock(&consumer_mutex);
         char last_c_char = (consumer_index > 0) ? consumer_array[consumer_index - 1] : '\0';
         if (last_c_char == 'R')
         {
@@ -255,6 +278,7 @@ void *consumer3(void *arg)
                 consumer_array[consumer_index++] = producer_array[--producer_index];
             }
         }
+        pthread_mutex_unlock(&consumer_mutex);
     }
 
     pthread_exit(NULL);
@@ -265,9 +289,13 @@ int main()
     pthread_t producer_threads[3];
     pthread_t consumer_threads[3];
 
+    pthread_mutex_init(&producer_mutex, NULL);
+    pthread_mutex_init(&consumer_mutex, NULL);
+
     pthread_create(&producer_threads[0], NULL, producer1, NULL);
     pthread_create(&producer_threads[1], NULL, producer2, NULL);
     pthread_create(&producer_threads[2], NULL, producer3, NULL);
+
     pthread_create(&consumer_threads[0], NULL, consumer1, NULL);
     pthread_create(&consumer_threads[1], NULL, consumer2, NULL);
     pthread_create(&consumer_threads[2], NULL, consumer3, NULL);
@@ -277,6 +305,10 @@ int main()
         pthread_join(producer_threads[i], NULL);
         pthread_join(consumer_threads[i], NULL);
     }
+
+    pthread_mutex_destroy(&producer_mutex);
+    pthread_mutex_destroy(&consumer_mutex);
+
     printf("Consumer Array: ");
     for (int i = 0; i < consumer_index; i++)
     {

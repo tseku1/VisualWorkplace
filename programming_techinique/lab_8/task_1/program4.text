@@ -17,6 +17,6 @@ void thread2() {
 
 ************************QUESTIONS***************************
 Data race: YES
-lines numbers:5 , 11
+lines numbers:6 , 12
 variables: x , y
 possible values of the variable "y" at the end of execution: 7
